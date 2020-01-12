@@ -1,0 +1,72 @@
+.message-page__control-menu {
+    display: flex;
+    justify-content: space-between;
+    height: 8vh;
+}
+
+.control-menu {
+    background-color: $color3;
+    box-shadow: 0 3px 80px rgba(23, 24, 32, 0.2);
+
+    &__menu {
+        display: flex;
+        justify-content: space-around;
+        width: 250px;
+        height: 100%;
+    }
+
+    &__box {
+        @include flex-center();
+        cursor: pointer;
+    }
+    
+    &__inbox {
+        background: url('/dist/images/conversation_menu/inbox.png') no-repeat;
+    }
+
+    &__sent {
+        background: url('/dist/images/conversation_menu/telegram.png') no-repeat;
+    }
+
+    &__trash {
+        background: url('/dist/images/conversation_menu/delete.png') no-repeat;
+    }
+
+    &__trash, 
+    &__sent,
+    &__inbox {
+        width: 32px;
+        height: 32px;
+        background-position: center;
+    }
+
+    &__text {
+        
+        &_fsize_s {
+            font-size: 0.9em;
+        }
+
+        &_color_white {
+            color: $color5
+        }
+
+        &_color_kinda-black {
+            color: $color2
+        }
+    }
+
+    &__filter-message-box {
+        display: flex;
+        width: 250px;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    &__filter {
+        border-radius: 18px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        background-color: $color3;
+        padding: 5px;
+        width: 80px;
+    }
+}

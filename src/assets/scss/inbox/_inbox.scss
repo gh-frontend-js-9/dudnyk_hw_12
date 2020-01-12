@@ -1,0 +1,11 @@
+.page-messages__messages {
+    height: 80vh;
+    display: flex;
+}
+
+@import './header/header';
+@import './sideMenu/sideMenu.scss';
+@import './inboxMenu/inboxMenu';
+@import './conversations/conversations';
+@import './messages/messages';
+@import './profile/profile';

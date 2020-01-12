@@ -1,0 +1,183 @@
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <meta http-equiv="X-UA-Compatible" content="ie=edge">
+            <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,900&display=swap" rel="stylesheet">
+            <link rel="shortcut icon" type="image/ico" href="/dist/images/favicon/favicon.ico">
+            <link rel="stylesheet" href="/dist/style.css">
+            <title>Inbox</title>
+        </head>
+        <body class="message-page">
+            <header class="header">
+                
+                <a href="#" class="header__logo">
+                    <img src="/dist/images/logo/Logo.png" alt="virtus"> 
+                </a>
+                
+                <div class="header-menu header__menu">
+                    <div class="header-menu__add">Add</div>
+                    <div class="header-menu__search"></div>
+                    <div class="header-menu__notification"></div>
+                    <div class="header-menu__user">
+                        <img src="" alt="user" class="header-menu__user-photo" id="header-menu__user-photo">
+                    </div>
+                </div>
+            
+            </header>
+
+
+            <nav class="navigation message-page__navigation">
+                
+                <ul class="list navigation__list">
+                    <li class="list__item"><a href="#" class="list__item-1"></a></li>
+                    <li class="list__item"><a href="#" class="list__item-2"></a></li>
+                    <li class="list__item"><a href="#" class="list__item-3"></a></li>
+                    <li class="list__item"><a href="#" class="list__item-4"></a></li>
+                    <li class="list__item"><a href="#" class="list__item-5"></a></li>
+                </ul>
+            
+            </nav>
+
+            <div class="control-menu message-page__control-menu">
+                
+                <div class="control-menu__menu">
+                    <div class="control-menu__box">
+                        <div class="control-menu__inbox"></div>
+                        <span class="control-menu__text control-menu__text_color_white control-menu__text_fsize_s">Inbox</span>
+                    </div>
+
+                    <div class="control-menu__box">
+                        <div class="control-menu__sent"></div>
+                        <span class="control-menu__text control-menu__text_color_kinda-black control-menu__text_fsize_s">Sent</span>
+                    </div>
+
+                    <div class="control-menu__box">
+                        <div class="control-menu__trash"></div>
+                        <span class="control-menu__text control-menu__text_color_kinda-black control-menu__text_fsize_s">Trash</span>
+                    </div>
+                </div>
+            
+                <div class="control-menu__filter-message-box">
+                    <span class="control-menu__text control-menu__text_color_white">Filter messages:</span>
+                    <select class="control-menu__filter control-menu__text control-menu__text_color_white">
+                        <option value="Data" class="control-menu__text control-menu__text_color_white">Date</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <div class="page-messages__messages">
+                
+                <div class="conversations">
+
+                    <div class="conversations-container" id="conversations-container">
+
+                    </div>
+
+                    <div class="conversations__add-new-conversation-block">
+                        <div class="conversations__add-conversation-btn" id="conversations__add-conversation-btn">
+                            <span class="conversations__text conversations__text_color_white">New Conversation</span>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="chat page-messages__chat" id="chat">
+                    <!-- <div class="chat__container"> -->
+                        
+                        <!-- <div class="message message_from-someone">
+                            <div class="message__content">
+                                <img src="/dist/images/usersImgs/lyall.png" alt="" class="message__user-photo message_mgright_5">
+                                <div class="message__text message__text_from-someone">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ulla pariatur.</div>
+                            </div>
+                            <span class="message__date message__date_from-someone">4 April 2016, 5:32 PM</span>
+                        </div> -->
+
+
+                        <!-- <div class="message message_to-someone">
+                            <div class="message__content">
+                                <div class="message__text  message__text_to-someone">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ulla pariatur.</div>
+                                <img src="/dist/images/usersImgs/user.png" alt="" class="message__user-photo message_mgleft_5">
+                            </div>
+                            <span class="message__date message__date_to-someone">4 April 2016, 5:32 PM</span>
+                        </div> -->
+
+                        
+                        <!-- <div class="message message_from-someone">
+                            <div class="message__content">
+                                <img src="/dist/images/usersImgs/lyall.png" alt="" class="message__user-photo message_mgright_5">
+                                <div class="message__text message__text_from-someone">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ulla pariatur.</div>
+                            </div>
+                            <span class="message__date message__date_from-someone">4 April 2016, 5:32 PM</span>
+                        </div> -->
+
+
+                        <!-- <div class="message message_to-someone">
+                            <div class="message__content">
+                                <div class="message__text message__text_to-someone">Ut enim ad minim venia.</div>
+                                <img src="/dist/images/usersImgs/user.png" alt="" class="message__user-photo message_mgleft_5">
+                            </div>
+                            <span class="message__date message__date_to-someone">4 April 2016, 5:32 PM</span>
+                        </div>
+                        -->
+
+                    <!-- </div>  -->
+
+                    <!-- <form class="chat__send-block" action="http://localhost:3000/api/threads/messages" method="post">
+                        <textarea class="chat__send" placeholder="Write a message..." name="message-text" rows='2' style="resize:none"></textarea>
+                        <span class="chat__attachment"></span>
+                    </form> -->
+                        
+                </div>
+
+                <div class="profile-container">
+                    <div class="profile-container__wrap" id="profile-container__wrap">
+                        
+                        <!-- <img src="/dist/images/usersImgs/lyall.png" alt="user" class="profile-container__user-photo">
+
+                        
+                        <div class="profile-container__box">
+                            <span class="profile-container__name">Lyall Roach</span>
+                            <span class="profile-container__profession">UX/UI Designer</span>
+                        </div>
+
+                        
+                        <p class="profile-container__about">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, 
+                            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                            Ut enim ad minim veniam, quis nostrud exercitation ullamco.
+                        </p>
+
+                        
+                        <div class="profile-container__box">
+                            <span class="profile-container__title">Email</span>
+                            <span class="profile-container__value">lyallroach@gmail.com</span>
+                        </div>
+
+
+                        <div class="profile-container__box">
+                            <span class="profile-container__title">Phone</span>
+                            <span class="profile-container__value">+48 500 400 300</span>
+                        </div>
+
+
+                        <div class="profile-container__box">
+                            <span class="profile-container__title">Adress</span>
+                            <address class="profile-container__value">65 Lorem St, Warsaw, PL</address>
+                        </div>
+
+
+                        <div class="profile-container__box">
+                            <span class="profile-container__title">Organization</span>
+                            <span class="profile-container__value">Symu.co</span>
+                        </div> -->
+
+                    </div>                                                                                                                                                                                                                                                                                                                                                                                                      
+                </div>
+            </div>
+        <script src="/dist/pages/inbox/main.js"></script>
+        </body>
+        </html>
