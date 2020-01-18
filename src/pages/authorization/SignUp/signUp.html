@@ -9,24 +9,24 @@
     <title>Virtus</title>
 </head>
 <body class="auth-page">
-
     <div class="auth-container">
+        
         <img src="/dist/images/logo/Logo.png" alt="virtus" class="auth-container__logo">
         
-        <h1 class="auth-container__title">Log In</h1>
-
-        <a href="./pages/authorization/SignUp/signUp.html"  class="auth-container__link">Not a member?</a>
-
-        <form action="https://geekhub-frontend-js-9.herokuapp.com/api/users/reset_password" method="POST" class="auth-form" id="LogInForm">
-
+        <h1 class="auth-container__title">Sign Up</h1>
+    
+        <a href="../../../index.html"  class="auth-container__link">Existin member?</a>
+    
+        <form action="https://geekhub-frontend-js-9.herokuapp.com/api/users/reset_password" method="POST" class="auth-form" id="signUpform">
+    
             <input type="email" name="email" id="email" class="auth-container__input" placeholder="Email">
             <input type="password" name="password" id="password" class="auth-container__input" placeholder="Password">
+            <input type="text" name="name" id="name" class="auth-container__input" placeholder="Name">
         
-            <button type="submit" class="auth-container__btn">Log In</button>
+            <button type="submit" class="auth-container__btn">Sign Up</button>
         </form>
 
-        <a href="./pages/authorization/ResetPassword/reset.html"  class="auth-container__link auth-container__link_position_center">Forgot password</a>
     </div>
 </body>
-<script src="/dist/pages/authorization/LogIn/logIn.js"></script>
+<script src="/dist/pages/authorization/SignUp/signUp.js"></script>
 </html>

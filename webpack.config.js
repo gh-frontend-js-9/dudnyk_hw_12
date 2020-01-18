@@ -5,7 +5,9 @@ let CopyWebpackPlugin= require('copy-webpack-plugin');
 
 let conf = {
     entry: {
-        'auth': './src/pages/authorization/main.js',
+        'pages/authorization/ResetPassword/reset': './src/pages/authorization/ResetPassword/main.js',
+        'pages/authorization/SignUp/signUp': './src/pages/authorization/SignUp/main.js',
+        'pages/authorization/LogIn/logIn': './src/pages/authorization/LogIn/main.js',
         'pages/inbox/main': './src/pages/inbox/main.js'
     },
     output: {
@@ -49,6 +51,16 @@ let conf = {
         new HtmlWebPackPlugin({
             filename: './index.html',
             template: path.resolve(__dirname, './src/index.html'),
+            inject: false
+        }),
+        new HtmlWebPackPlugin({
+            filename: './pages/authorization/ResetPassword/reset.html',
+            template: path.resolve(__dirname, './src/pages/authorization/ResetPassword/reset.html'),
+            inject: false
+        }),
+        new HtmlWebPackPlugin({
+            filename: './pages/authorization/SignUp/signUp.html',
+            template: path.resolve(__dirname, './src/pages/authorization/SignUp/signUp.html'),
             inject: false
         }),
         new HtmlWebPackPlugin({

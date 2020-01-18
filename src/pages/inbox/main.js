@@ -1,3 +1,4 @@
+import '../../assets/scss/style.scss';
 import ConversationsBlock from'./scripts/conversations';
 import validateToken from '../authorization/scripts/validateCurrent.js'
 import {md5} from 'pure-md5'

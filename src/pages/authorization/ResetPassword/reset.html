@@ -11,22 +11,23 @@
 <body class="auth-page">
 
     <div class="auth-container">
+        
         <img src="/dist/images/logo/Logo.png" alt="virtus" class="auth-container__logo">
         
-        <h1 class="auth-container__title">Log In</h1>
+        <h1 class="auth-container__title">Reset password</h1>
 
-        <a href="./pages/authorization/SignUp/signUp.html"  class="auth-container__link">Not a member?</a>
+        <a href="../../../index.html" class="auth-container__link">Not a member?</a>
 
-        <form action="https://geekhub-frontend-js-9.herokuapp.com/api/users/reset_password" method="POST" class="auth-form" id="LogInForm">
+        <form action="https://geekhub-frontend-js-9.herokuapp.com/api/users/reset_password" method="POST" class="auth-form" id="resetForm">
 
             <input type="email" name="email" id="email" class="auth-container__input" placeholder="Email">
             <input type="password" name="password" id="password" class="auth-container__input" placeholder="Password">
+            <input type="password" name="password" id="confirm-password" class="auth-container__input" placeholder="Confirmation  password">
         
-            <button type="submit" class="auth-container__btn">Log In</button>
+            <button type="submit" class="auth-container__btn">Reset password</button>
         </form>
 
-        <a href="./pages/authorization/ResetPassword/reset.html"  class="auth-container__link auth-container__link_position_center">Forgot password</a>
     </div>
 </body>
-<script src="/dist/pages/authorization/LogIn/logIn.js"></script>
+<script src="/dist/pages/authorization/ResetPassword/reset.js"></script>
 </html>

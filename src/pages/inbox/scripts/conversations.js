@@ -216,9 +216,9 @@ export default class ConversationsBlock {
 }
 
 async function getConversations() {
-    return await fetch('http://localhost:3000/api/threads', { 
+    return await fetch('https://geekhub-frontend-js-9.herokuapp.com/api/threads', { 
         headers: {
-            "Authorization": localStorage.token
+            "x-access-token": localStorage.token
         }})
         .then((resp) => {
             return resp;
@@ -235,11 +235,11 @@ async function startThread(id) {
         }
     }
 
-    return await fetch('http://localhost:3000/api/threads', {
+    return await fetch('https://geekhub-frontend-js-9.herokuapp.com/api/threads', {
         method: 'POST', 
         headers: {
             'Content-Type': 'application/json',
-            "Authorization": localStorage.token
+            'x-access-token': localStorage.token
         },
         body: JSON.stringify(obj)
     })
@@ -260,7 +260,7 @@ async function getThreadMessages(threadId) {
     return await fetch('http://localhost:3000/api/threads/messages/'+threadId, {
         method: 'get',
         headers:{
-            'Authorization': localStorage.token,
+            'x-access-token': localStorage.token,
             'Content-Type': 'application/json'
         }/*,
         body : JSON.stringify(obj)*/

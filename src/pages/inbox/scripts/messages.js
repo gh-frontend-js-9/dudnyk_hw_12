@@ -275,10 +275,10 @@ async function SendMessage(id, message) {
         }
     }
     
-    return await fetch('http://localhost:3000/api/threads/messages', {
+    return await fetch('https://geekhub-frontend-js-9.herokuapp.com/api/threads/messages', {
         method: 'post',
         headers: {
-            'Authorization': localStorage.token,
+            'x-access-token': localStorage.token,
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(obj)

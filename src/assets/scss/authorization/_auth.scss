@@ -28,6 +28,9 @@
     &__link {
         color: $color4;
         text-decoration: none;
+        &_position_center {
+            align-self: center;
+        }
     }
 
     &__input {
@@ -54,13 +57,14 @@
         border: 1px solid black;
         padding: 5px;
         margin: 5px;
-        width: 75px;
-        height: 30px;
+        width: 80px;
+        min-height: 35px;
         background-color: $color3;
         border-radius: 3px;
         cursor: pointer;
         border: 1px solid rgba(156, 161, 178, 0.3);
         color: $color5;
+        align-self: center;
     }
 
     &__bad-response {
@@ -73,11 +77,9 @@
         margin: 10px auto;
         padding: 5px;
     }
-
-
 }
 
-#auth-form {
+.auth-form {
     display: flex;
     flex-direction: column;
 }
