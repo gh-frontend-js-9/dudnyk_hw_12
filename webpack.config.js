@@ -11,9 +11,9 @@ let conf = {
         'pages/inbox/main': './src/pages/inbox/main.js'
     },
     output: {
-        path: path.resolve(__dirname, './dist/'),
+        path: path.resolve(__dirname, 'dist'),
         filename: '[name].js',
-        publicPath: 'dist/'
+        publicPath: '/dist/'
     },
     module: {
         rules: [
@@ -43,7 +43,7 @@ let conf = {
     },
     devtool: 'eval-sourcemap',
     devServer: {
-        openPage: './src/index.html',
+        contentBase: 'dist',
         overlay: true
     },
     plugins: [

@@ -20,9 +20,9 @@ export default class Messages {
         return chatContainer;
     }
 
-    createMessage(message, obj, isMe) {
-        // console.log(message)
-        // console.log(obj)
+    createMessage(message, /*obj,*/ isMe) {
+        // console.log(message);
+        // console.log(obj);
         // console.log(isMe);
         let messageType = isMe ? 'to' : 'from';
         let margin = isMe ? 'mgleft' : 'mgright';
@@ -34,11 +34,12 @@ export default class Messages {
         content.classList.add('message__content');
 
         let img = document.createElement('img');
-        let hash = md5(obj.email.toLowerCase());
         
-        img.setAttribute('src', 'https://www.gravatar.com/avatar/' + hash + '?s=60&d=wavatar')
-        img.setAttribute('alt', 'user photo');
-        img.classList.add('message__user-photo', 'message_' + margin + '_5');
+        // let hash = md5(obj.email.toLowerCase());
+        
+        // img.setAttribute('src', 'https://www.gravatar.com/avatar/' + hash + '?s=60&d=wavatar')
+        // img.setAttribute('alt', 'user photo');
+        // img.classList.add('message__user-photo', 'message_' + margin + '_5');
 
         let text = document.createElement('p');
         text.textContent = message.body;
@@ -48,7 +49,8 @@ export default class Messages {
         
         const monthNames = [
             "January", "February", "March", "April", "May", "June",
-            "July", "August", "September", "October", "November", "December"];
+            "July", "August", "September", "October", "November", "December"
+        ];
         
         let FormatedDate = (date) => {
             date = new Date(Date.parse(date));
@@ -76,30 +78,31 @@ export default class Messages {
         textarea.name = 'message-text';
         textarea.rows = 2;
         textarea.addEventListener('keypress', (e) =>{
-            
             if (e.which === 13) {
                 console.log(obj, textarea.value)
                 e.preventDefault();
-                SendMessage(obj["_id"], textarea.value)
-                .then((resp) => {
-                
-                    if(resp.status === 200) {
-                        return resp.json();
-                    } else {
-                        throw new Error('Failed to send');
-                    }
-                })
-                .then((resp) => {
-                    console.log(resp)
-                    let me  = obj.users.find((obj) => {if(obj['_id' === localStorage.myId]) return obj})
-                    let message = this.createMessage(resp, me, true)
-                    chatContainer.append(message);
-                    chatContainer.scrollTop = chatContainer.scrollHeight;
-                    textarea.value = '';
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
+                if (textarea.value) {
+                    SendMessage(obj["_id"], textarea.value)
+                    .then((resp) => {
+                    
+                        if(resp.status === 200) {
+                            return resp.json();
+                        } else {
+                            throw new Error('Failed to send');
+                        }
+                    })
+                    .then((resp) => {
+                        console.log(resp)
+                        let me  = obj.users.find((obj) => {if(obj['_id' === localStorage.myId]) return obj})
+                        let message = this.createMessage(resp, /*me,*/ true)
+                        chatContainer.append(message);
+                        chatContainer.scrollTop = chatContainer.scrollHeight;
+                        textarea.value = '';
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+                }
             }
 
         });
@@ -110,7 +113,6 @@ export default class Messages {
     }
 
 }
-
 
 async function SendMessage(id, message) {
     let obj = {

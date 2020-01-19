@@ -139,13 +139,19 @@
         background-color: $color1;
     }
 
-    &__exit-container {
-        display: flex;
-        justify-content: flex-end;
+    &__title-container {
+        position: relative;
         height: 10%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: $color3;
     }
 
     &__exit {
+        position: absolute;
+        line-height: 1em;
+        right: 0;
         padding: 3px;
         cursor: pointer;
         color: $color3;

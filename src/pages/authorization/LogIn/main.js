@@ -13,7 +13,7 @@ if (localStorage.token) {
     .then((response) => {
         localStorage.setItem('myId', response['_id'])
         localStorage.setItem('myEmail', response.email)
-        window.location.href = '/dist/pages/inbox/inbox.html';
+        window.location.href = '/pages/inbox/inbox.html';
     })
     .catch((error)=> {
       console.log(error);
@@ -51,7 +51,7 @@ LogInForm.addEventListener("submit", (event) => {
         .then((resp) => {            
             localStorage.setItem('myId', resp['_id'])
             localStorage.setItem('myEmail', resp.email)
-            window.location.href = '/dist/pages/inbox/inbox.html'
+            window.location.href = '/pages/inbox/inbox.html'
         })
         .catch((error)=> { console.log(error) })
     }

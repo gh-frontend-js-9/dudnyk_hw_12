@@ -18,18 +18,23 @@
     &__box {
         @include flex-center();
         cursor: pointer;
+        flex-basis: 33.33%;
+        
+        &:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
     }
     
     &__inbox {
-        background: url('/dist/images/conversation_menu/inbox.png') no-repeat;
+        background: url('/images/conversation_menu/inbox.png') no-repeat;
     }
 
     &__sent {
-        background: url('/dist/images/conversation_menu/telegram.png') no-repeat;
+        background: url('/images/conversation_menu/telegram.png') no-repeat;
     }
 
     &__trash {
-        background: url('/dist/images/conversation_menu/delete.png') no-repeat;
+        background: url('/images/conversation_menu/delete.png') no-repeat;
     }
 
     &__trash, 

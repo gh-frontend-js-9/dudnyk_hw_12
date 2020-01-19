@@ -8,7 +8,7 @@ validateToken(localStorage.token).then((resp)=> {
     if(resp.status === 200) {
         return resp.json();
     } else {
-        window.location.href = '/dist/index.html';
+        window.location.href = '/index.html';
     }
 }).then((resp)=> {
     localStorage.setItem('myId', resp['_id'])
@@ -27,11 +27,5 @@ let convBlock = new ConversationsBlock(convContainer);
 convBlock.createAllThreads();
 
 newThreadBtn.addEventListener('click', () => {
-    // let id = prompt("id: ");
-    // if (id.length !== 24) {
-    //     console.log('Id is wrong');
-    // } else {
-    //     convBlock.startThread(id);
-    // }
     convBlock.startThread();
 });
