@@ -28,7 +28,8 @@
         position: relative;
     }
 
-    &__send {
+    &__textarea {
+        resize: none;
         border-radius: 15px;
         padding: 5px 10% 5px 10px ;
         border: 1px solid rgba(156, 161, 178, 0.3);

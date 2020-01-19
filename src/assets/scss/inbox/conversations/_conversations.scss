@@ -15,7 +15,7 @@
         border-radius: 3px;
         cursor: pointer;
         width: 80%;
-        height: 30%;
+        min-height: 30%;
         @include flex-center();
         padding: 5px;
         font-size: 0.8em;
@@ -118,4 +118,66 @@
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
     }   
+}
+
+.all-users{
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(255, 255, 255, 0.1);
+    position: absolute;
+    top: 0;
+
+    &__container {
+        padding: 10px;
+        position: absolute;
+        z-index: 2;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 50vw;
+        height: 60vh;
+        background-color: $color1;
+    }
+
+    &__exit-container {
+        display: flex;
+        justify-content: flex-end;
+        height: 10%;
+    }
+
+    &__exit {
+        padding: 3px;
+        cursor: pointer;
+        color: $color3;
+    }
+
+    &__user-container {
+        height: 90%;
+        overflow-y: scroll;
+        overflow-x: hidden;
+    
+        &::-webkit-scrollbar {
+            width: 0px;
+        }
+    }
+
+    &__user {
+        height: 30px;
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        color: $color5;
+
+        &:hover {
+            background-color: $color2;
+        }
+    }
+
+    &__img {
+
+        border-radius: 50%;
+        width: 24px;
+        height: 24px;
+    }
 }

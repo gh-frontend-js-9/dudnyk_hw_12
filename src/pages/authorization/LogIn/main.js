@@ -11,7 +11,9 @@ if (localStorage.token) {
       }
     })
     .then((response) => {
-      window.location.href = '/dist/pages/inbox/inbox.html';
+        localStorage.setItem('myId', response['_id'])
+        localStorage.setItem('myEmail', response.email)
+        window.location.href = '/dist/pages/inbox/inbox.html';
     })
     .catch((error)=> {
       console.log(error);
@@ -30,9 +32,9 @@ LogInForm.addEventListener("submit", (event) => {
     if (isFilled(email, password)) {
         Send(email.value, password.value).then((response) => {
         
-            if (response.status === 200) {
+            if (response.status === 200) {                
                 localStorage.setItem('token', response.headers.get('x-auth-token'))
-                window.location.href = '/dist/pages/inbox/inbox.html'
+                return response.json();
             } else {
                 let errorMessages = document.getElementsByClassName('auth-container__bad-response');
                 if (errorMessages.length !== 0) {
@@ -45,6 +47,11 @@ LogInForm.addEventListener("submit", (event) => {
                 badResponse.textContent = "User does not exist";
                 document.body.after(badResponse);
             }
+        })
+        .then((resp) => {            
+            localStorage.setItem('myId', resp['_id'])
+            localStorage.setItem('myEmail', resp.email)
+            window.location.href = '/dist/pages/inbox/inbox.html'
         })
         .catch((error)=> { console.log(error) })
     }

@@ -6,21 +6,17 @@ export default class ConversationsBlock {
     constructor(root) {
         this.root = root;
         this.threads = [];
-        this.myID;
     }
     
     findSender(arr) {
-        return arr.find((el)=> !el.me);
+        let interlocutor = arr.find((el) => el['_id'] !== localStorage.myId);
+        if (interlocutor) return interlocutor; 
+        else return arr[0];
     }
-    
-    findMyId(arr) {
-        arr.forEach((obj)=> {
-            if (obj.me) this.myID = obj['_id'];
-        });
-    }
-    
+
     createAllThreads() {
-        getConversations().then((resp) => {
+        SendGetConversationsRequest()
+        .then((resp) => {
             if(resp.status === 200) {
                 return resp.json();
             } else {
@@ -28,9 +24,8 @@ export default class ConversationsBlock {
             }
         })
         .then((resp) => {
-            // console.log(resp)
+            console.log(resp)
             if (resp.length > 0) {
-                this.findMyId(resp[0].users);
 
                 for(let i = 0; i < resp.length; i++) {
                     
@@ -38,8 +33,8 @@ export default class ConversationsBlock {
                     
                     let thread = this.createThread(
                         this.findSender(obj.users).name, 
-                        obj.last_message, 
-                        this.findSender(obj.users).email, 
+                        // obj.last_message, 
+                        // this.findSender(obj.users).email, 
                         obj.updated_at
                     );
 
@@ -47,13 +42,10 @@ export default class ConversationsBlock {
                     
                     thread.addEventListener('click', () => {
 
-                        // let threads = document.querySelectorAll('.conversation')
-                        
-
                         let chat = document.querySelector('#chat');
                         let messBlock = new MessagesBlock(chat);
                         
-                        getThreadMessages(obj['_id'])
+                        SendgetThreadMessagesRequest(obj['_id'])
                         .then((resp) => {
                             if (resp.status === 200) {
                                 return resp.json();
@@ -62,47 +54,46 @@ export default class ConversationsBlock {
                             }
                         })
                         .then((resp)=> {
-                            // console.log(obj)
                             let chatContainer = messBlock.createChatContainer();
                             let form = messBlock.createForm(obj, chatContainer);
+                            // console.log(this.findSender(obj))
+                            // let sortedMessages = resp.messages.sort((a,b) => {
+                            //     let dateA = new Date(a.created_at) 
+                            //     let dateB = new Date(b.created_at)
+                            //     return dateA - dateB
+                            // })
 
-                            let sortedMessages = resp.messages.sort((a,b) => {
-                                let dateA = new Date(a.created_at) 
-                                let dateB = new Date(b.created_at)
-                                return dateA - dateB
-                            })
+                            // sortedMessages.forEach((message)=>{
+                            //     //make it less dumb
+                            //     let userEmail = obj.users.filter((obj) => {
+                            //         if (obj['_id'] === message.user) {
+                            //             return obj
+                            //         }
+                            //     })
 
-                            // console.log(sortedMessages)
-                            // console.log(resp.messages)
-                            // console.log(resp)
-
-                            sortedMessages.forEach((message)=>{
-                                //make it less dumb
-                                let userEmail = obj.users.filter((obj) => {
-                                    if (obj['_id'] === message.user) {
-                                        return obj
-                                    }
-                                })
-
-                                // if ((message.user === this.myID)) {
-                                //     chatContainer.append(messBlock.createToMessage(message, userEmail));
-                                // } else {
-                                //     chatContainer.append(messBlock.createFromMessage(message, userEmail));
-                                // } 
-                                let isMe = message.user === this.myID;
-                                chatContainer.append(messBlock.createMessage(message, userEmail[0], isMe))
+                            //     let isMe = message.user === this.myID;
+                            //     chatContainer.append(messBlock.createMessage(message, userEmail[0], isMe))
                                 
-                            });
+                            // });
+
+                            if (resp.length > 0) {
+                                
+                            }
+                        
+                            console.log(resp)
+                            // chatContainer.append(messBlock.createMessage())
+                            
                             messBlock.createMessagesBlock(chatContainer, form);
                             chatContainer.scrollTop = chatContainer.scrollHeight;
 
                             return resp;
                         })
                         .then((resp)=> {
-                            let profileRoot = document.querySelector('#profile-container__wrap')
-                            let profile = new ProfileBlock(profileRoot); 
-                            // console.log(this.findSender(resp.users))
-                            profile.createBlock(this.findSender(resp.users));
+                            // let profileRoot = document.querySelector('#profile-container__wrap')
+                            // let profile = new ProfileBlock(profileRoot); 
+                            // // console.log(this.findSender(resp.users))
+                            // console.log(resp)
+                            // profile.createBlock(this.findSender(resp.users));
                         }).then(()=> {
                             let conv = document.getElementsByClassName('conversation')
                     
@@ -121,49 +112,97 @@ export default class ConversationsBlock {
                     });
 
                     this.root.append(thread);
-                    
-                    // classList.toggle('conversation_active');
 
                     if (i === 0) {
                         thread.click();
                     }
                 }
-            } //else {
-            //     console.log(1)
-            //     let addThreadBlock = this.createaddThreadBtn();
-            //     this.root.append(addThreadBlock);
-            // }
+            } 
         });
     }
 
-    // createaddThreadBtn() {
-    //     let container = document.createElement('div');
-    //     container.classList.add('conversations__add-new-conversation-block');
-        
-    //     let btn = document.createElement('span');
-    //     btn.classList.add('conversations__text', 'conversations__text_color_white')
-    //     container.append(btn);
-        
-    //     return container;
-    // }
+    startThread() {
+        SendGetAllUsersReques()
+        .then((resp) => {
+            console.log(resp)
+            if (resp.status === 200) {
+                return resp.json();
+            } else {
+                throw new Error ('Can not get all users')
+                
+            }
+        })
+        .then((resp) => {
+            let usersBackground = document.createElement('div');
+            usersBackground.setAttribute('class', 'all-users');
 
-    startThread(id) {
-        //check if there is not a thread with such id
-        if (!this.threads.some( (el) => (el.users.map((el) => el['_id'])).includes(id))) {
-            // console.log("ok!");
-            startThread(id).then((resp)=> {
-                // console.log(resp)
-                while (this.root.firstChild) {
-                    this.root.removeChild(this.root.firstChild);
-                }
-                this.createAllThreads();
+            let container = document.createElement('div');
+            container.setAttribute('class', 'all-users__container');
+            
+            let exitContainer = document.createElement('div');
+            exitContainer.setAttribute('class', 'all-users__exit-container')
+            
+            let exit = document.createElement('span');
+            exit.setAttribute('class', 'all-users__exit')
+            exit.innerHTML = '&#x2716;';
+
+            exitContainer.append(exit)
+
+            exit.addEventListener('click', () => {
+                container.remove();
+                usersBackground.remove();
+                return;
             });
-        } else {
-            console.log('You already have such a thread!')
-        }
-    }
 
-    createThread(name, message, email, date) {
+            usersBackground.addEventListener('click', () => {
+                container.remove();
+                usersBackground.remove();
+                return;
+            });
+
+            container.append(exitContainer);
+
+            let userContainer = document.createElement('div');
+            userContainer.setAttribute('class', 'all-users__user-container')
+
+            resp.forEach((el) => {
+               
+                let user = document.createElement('div');
+                user.setAttribute('class', 'all-users__user');
+
+                let span = document.createElement('span');
+                span.textContent = el.name
+                
+                user.append(span);
+                
+                user.addEventListener('click', () => {
+                    container.remove();
+                    usersBackground.remove();
+    
+                    SendStartThreadRequest(el['_id'])
+                    .then((resp) => {
+                        if (resp.status === 200) {
+                            while (this.root.firstChild) {
+                                this.root.removeChild(this.root.firstChild);
+                            }
+                            this.createAllThreads();
+                        } 
+                        else throw new Error ('Can`t create thread');  
+                    }) 
+                });
+
+                userContainer.append(user);
+            });
+
+            container.append(userContainer);
+            usersBackground.append(container);
+
+            document.body.append(usersBackground, container);
+        })
+    }
+    
+
+    createThread(name, date) {
         let conversation = document.createElement('div');
         conversation.setAttribute('class', 'conversation');
 
@@ -175,13 +214,6 @@ export default class ConversationsBlock {
 
         let conversation__user = document.createElement('div');
         conversation__user.setAttribute('class', 'conversation__user');
-        
-        let hash = md5(email.toLowerCase());
-        // console.log(hash)
-        let img = document.createElement('img');
-        img.setAttribute('src', 'https://www.gravatar.com/avatar/' + hash + '?s=60&d=wavatar')
-        img.setAttribute('class', 'conversation__user-photo');
-        img.setAttribute('alt', 'user photo');
 
         let conversation__name = document.createElement('span');
         conversation__name.setAttribute('class', 'conversation__name')
@@ -196,26 +228,74 @@ export default class ConversationsBlock {
         conversation__date.setAttribute('class', 'conversation__date conversation__date_viewed');
         conversation__date.textContent = formatedDate(date);
         
-        let conversation__message = document.createElement('p');
-        conversation__message.setAttribute('class', 'conversation__message');
-
-        message = typeof(message) === 'string' ? message : message.body
-        conversation__message.textContent = message;
-
         conversation.append(conversation__wrap);
         conversation__wrap.append(conversation__header);
 
         conversation__header.append(conversation__user);
-        conversation__user.append(img);
         conversation__user.append(conversation__name);
         conversation__header.append(conversation__date);
-        conversation__wrap.append(conversation__message);
         
         return conversation;
     }
 }
 
-async function getConversations() {
+
+// old create thread    
+//     createThread(name, message, email, date) {
+//         let conversation = document.createElement('div');
+//         conversation.setAttribute('class', 'conversation');
+
+//         let conversation__wrap = document.createElement('div');
+//         conversation__wrap.setAttribute('class', 'conversation__wrap');
+
+//         let conversation__header = document.createElement('div');
+//         conversation__header.setAttribute('class', 'conversation__header');
+
+//         let conversation__user = document.createElement('div');
+//         conversation__user.setAttribute('class', 'conversation__user');
+        
+//         let img = document.createElement('img');
+//         img.setAttribute('src', 'https://www.gravatar.com/avatar/' + getHash(email) + '?s=60&d=wavatar')
+//         img.setAttribute('class', 'conversation__user-photo');
+//         img.setAttribute('alt', 'user photo');
+
+//         let conversation__name = document.createElement('span');
+//         conversation__name.setAttribute('class', 'conversation__name')
+//         conversation__name.textContent = name;
+
+//         const formatedDate = (date) => {
+//             date = new Date(Date.parse(date));
+//             return `${date.getDate()}.${date.getMonth() < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1}.${date.getFullYear()}`
+//         }
+
+//         let conversation__date = document.createElement('span');
+//         conversation__date.setAttribute('class', 'conversation__date conversation__date_viewed');
+//         conversation__date.textContent = formatedDate(date);
+        
+//         let conversation__message = document.createElement('p');
+//         conversation__message.setAttribute('class', 'conversation__message');
+
+//         message = typeof(message) === 'string' ? message : message.body
+//         conversation__message.textContent = message;
+
+//         conversation.append(conversation__wrap);
+//         conversation__wrap.append(conversation__header);
+
+//         conversation__header.append(conversation__user);
+//         conversation__user.append(img);
+//         conversation__user.append(conversation__name);
+//         conversation__header.append(conversation__date);
+//         conversation__wrap.append(conversation__message);
+        
+//         return conversation;
+//     }
+// }
+
+function getHash(email) {
+    return md5(email.toLowerCase());
+}
+
+async function SendGetConversationsRequest() {
     return await fetch('https://geekhub-frontend-js-9.herokuapp.com/api/threads', { 
         headers: {
             "x-access-token": localStorage.token
@@ -228,7 +308,18 @@ async function getConversations() {
         });
 }
 
-async function startThread(id) {
+async function SendGetAllUsersReques() {
+    return await fetch('https://geekhub-frontend-js-9.herokuapp.com/api/users/all', {
+        headers: {
+            'x-access-token': localStorage.token
+        }
+    })
+    .then((resp) => {
+        return resp;
+    })
+}
+
+async function SendStartThreadRequest(id) {
     let obj = {
         'user': {
             '_id': id
@@ -251,20 +342,13 @@ async function startThread(id) {
     });
 }
 
-async function getThreadMessages(threadId) {
-    // let obj = {
-    //     'thread':{
-    //         '_id': threadId
-    //     }
-    // }
-    return await fetch('http://localhost:3000/api/threads/messages/'+threadId, {
+async function SendgetThreadMessagesRequest(threadId) {
+    return await fetch('https://geekhub-frontend-js-9.herokuapp.com/api/threads/messages/'+threadId, {
         method: 'get',
         headers:{
             'x-access-token': localStorage.token,
             'Content-Type': 'application/json'
-        }/*,
-        body : JSON.stringify(obj)*/
-        }).then((resp)=> {
-        return resp;
+        }
     })
+    .then((resp)=> { return resp })
 }

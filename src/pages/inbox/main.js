@@ -11,6 +11,8 @@ validateToken(localStorage.token).then((resp)=> {
         window.location.href = '/dist/index.html';
     }
 }).then((resp)=> {
+    localStorage.setItem('myId', resp['_id'])
+    localStorage.setItem('myEmail', resp.email)
     console.log(resp.email)
     let hash = md5(resp.email.toLowerCase()); 
     let img = document.querySelector('#header-menu__user-photo');
@@ -19,19 +21,17 @@ validateToken(localStorage.token).then((resp)=> {
 
 let convContainer = document.querySelector('#conversations-container');
 
-// let container = document.querySelector('.page-messages__messages');
-
 let newThreadBtn = document.querySelector('#conversations__add-conversation-btn');
-// let convBlock = new ConversationsBlock(container);
 let convBlock = new ConversationsBlock(convContainer);
 
 convBlock.createAllThreads();
 
 newThreadBtn.addEventListener('click', () => {
-    let id = prompt("id: ");
-    if (id.length !== 24) {
-        console.log('Id is wrong');
-    } else {
-        convBlock.startThread(id);
-    }
+    // let id = prompt("id: ");
+    // if (id.length !== 24) {
+    //     console.log('Id is wrong');
+    // } else {
+    //     convBlock.startThread(id);
+    // }
+    convBlock.startThread();
 });
