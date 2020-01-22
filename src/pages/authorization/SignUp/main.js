@@ -39,7 +39,7 @@ async function Send(email, password, name) {
     'password': password,
     'name': name
     }
-    return await fetch('//https://geekhub-frontend-js-9.herokuapp.com//api/users/', {
+    return await fetch('//https://geekhub-frontend-js-9.herokuapp.com/api/users/', {
     method: 'POST',
     headers: {
     'Content-Type': 'application/json'

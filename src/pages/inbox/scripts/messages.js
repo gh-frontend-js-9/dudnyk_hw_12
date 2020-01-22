@@ -1,5 +1,3 @@
-import {md5} from 'pure-md5';
-
 export default class Messages {
     constructor(root) {
         this.root = root;
@@ -20,7 +18,8 @@ export default class Messages {
         return chatContainer;
     }
 
-    createMessage(message, /*obj,*/ isMe) {
+    createMessage(message, email ,isMe) {
+        // console.log(email)
         // console.log(message);
         // console.log(obj);
         // console.log(isMe);
@@ -34,12 +33,10 @@ export default class Messages {
         content.classList.add('message__content');
 
         let img = document.createElement('img');
-        
-        // let hash = md5(obj.email.toLowerCase());
-        
-        // img.setAttribute('src', 'https://www.gravatar.com/avatar/' + hash + '?s=60&d=wavatar')
-        // img.setAttribute('alt', 'user photo');
-        // img.classList.add('message__user-photo', 'message_' + margin + '_5');
+                
+        img.setAttribute('src', 'https://www.gravatar.com/avatar/' + email + '?s=60&d=wavatar')
+        img.setAttribute('alt', 'user photo');
+        img.classList.add('message__user-photo', 'message_' + margin + '_5');
 
         let text = document.createElement('p');
         text.textContent = message.body;
@@ -68,7 +65,7 @@ export default class Messages {
     }
 
     createForm(obj, chatContainer) {
-        
+
         let form = document.createElement('form');
         form.setAttribute('class', 'chat__send-block');
         

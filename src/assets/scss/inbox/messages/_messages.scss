@@ -87,6 +87,7 @@
     &__text {
         color: $color5;
         padding: 10px;
+        word-break: break-all;
 
         &_to-someone {
             border-radius: 10px 10px 0 10px;

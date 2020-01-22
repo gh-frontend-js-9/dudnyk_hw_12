@@ -24,89 +24,95 @@ export default class ConversationsBlock {
             }
         })
         .then((resp) => {
-            console.log(resp)
+            // console.log(resp)
             if (resp.length > 0) {
 
                 for(let i = 0; i < resp.length; i++) {
                     
                     let obj = resp[i];
-                    
-                    let thread = this.createThread(
-                        this.findSender(obj.users).name, 
-                        // obj.last_message, 
-                        // this.findSender(obj.users).email, 
-                        obj.updated_at
-                    );
+                    // console.log(obj)
+                    SendGetUserByIdRequest(this.findSender(obj.users)['_id'])
+                    .then((resp) => resp.json())
+                    .then((resp) => { 
+                        let senderEmail = resp.email
+                        let thread = this.createThread(
+                            this.findSender(obj.users).name, 
+                            obj.updated_at,
+                            obj.message,
+                            resp.email
+                        );
 
-                    this.threads.push(obj);
-                    
-                    thread.addEventListener('click', () => {
-                        let conv = document.getElementsByClassName('conversation')
-                    
-                        // console.log(conv);
-                        for (let i = 0; i < conv.length; i++) {
-                            if (conv[i].classList.contains('conversation_active')) {
-                                conv[i].classList.toggle('conversation_active');    
-                            }
-                        }
-                        thread.classList.add('conversation_active');
-
-                        let chat = document.querySelector('#chat');
-                        let messBlock = new MessagesBlock(chat);
+                        this.threads.push(obj);
                         
-                        SendgetThreadMessagesRequest(obj['_id'])
-                        .then((resp) => {
-                            if (resp.status === 200) {
-                                return resp.json();
-                            } else {
-                                throw new Error('Bad response');
+                        thread.addEventListener('click', () => {
+                            let conv = document.getElementsByClassName('conversation')
+                        
+                            for (let i = 0; i < conv.length; i++) {
+                                if (conv[i].classList.contains('conversation_active')) {
+                                    conv[i].classList.toggle('conversation_active');    
+                                }
                             }
-                        })
-                        .then((resp)=> {
-                            let chatContainer = messBlock.createChatContainer();
-                            let form = messBlock.createForm(obj, chatContainer);
-
-                            if (resp.length > 0) {
-                                resp.forEach((el) => {
-                                    let isMe = localStorage.myId === el.user['_id']
-                                    chatContainer.append(messBlock.createMessage(el, isMe))
-                                })
-                            }                        
-                            console.log(resp)
-                    
-                            messBlock.createMessagesBlock(chatContainer, form);
-                            chatContainer.scrollTop = chatContainer.scrollHeight;
-
-                            return resp;
-                        })
-                        .then((resp)=> {
-                            // let profileRoot = document.querySelector('#profile-container__wrap')
-                            // let profile = new ProfileBlock(profileRoot); 
-                            // // console.log(this.findSender(resp.users))
-                            // console.log(resp)
-                            // profile.createBlock(this.findSender(resp.users));
-                        }).then(()=> {
-                            // let conv = document.getElementsByClassName('conversation')
-                    
-                            // console.log(conv);
-                            // for (let i = 0; i < conv.length; i++) {
-                            //     if (conv[i].classList.contains('conversation_active')) {
-                            //         conv[i].classList.toggle('conversation_active');    
-                            //     }
-                            // }
-                            // thread.classList.add('conversation_active');
                             
-                        })
-                        .catch((error) => {
-                            console.log(error)
+                            thread.classList.add('conversation_active');
+
+                            let chat = document.querySelector('#chat');
+                            let messBlock = new MessagesBlock(chat);
+                            // let myPhotoUrl = await fetch()
+
+                            
+                            SendGetThreadMessagesRequest(obj['_id'])
+                            .then((resp) => {
+                                if (resp.status === 200) {
+                                    return resp.json();
+                                } else {
+                                    throw new Error('Bad response');
+                                }
+                            })
+                            .then((resp)=> {
+                                let chatContainer = messBlock.createChatContainer();
+                                let form = messBlock.createForm(obj, chatContainer);
+
+                                if (resp.length > 0) {
+                                    resp.forEach((el) => {
+                                        let isMe = localStorage.myId === el.user['_id']
+                                        chatContainer.append(messBlock.createMessage(el, getHash(senderEmail), isMe))
+                                    })
+                                }                        
+                                console.log(resp)
+                        
+                                messBlock.createMessagesBlock(chatContainer, form);
+                                chatContainer.scrollTop = chatContainer.scrollHeight;
+
+                                return resp;
+                            })
+                            .then((resp)=> {
+                                let sender = this.findSender(obj.users)['_id'];
+                                SendGetUserByIdRequest(sender)
+                                .then((resp) => {
+                                    if (resp.status === 200) {
+                                        return resp.json()
+                                    } else throw new Error('cant get user by id');
+                                }).then((resp)=> {    
+                                    let profileRoot = document.querySelector('#profile-container__wrap')
+                                    let profile = new ProfileBlock(profileRoot);
+                                    profile.createBlock(resp);
+                                }).catch((error)=> { console.log(error) })
+                            
+                                // console.log(this.findSender(resp.users))
+                                // // console.log(resp)
+                                // profile.createBlock(this.findSender(resp.users));
+                            })
+                            .catch((error) => {
+                                console.log(error)
+                            });
                         });
-                    });
 
-                    this.root.append(thread);
+                        this.root.append(thread);
 
-                    if (i === 0) {
-                        thread.click();
-                    }
+                        if (i === 0) {
+                            thread.click();
+                        }
+                    })
                 }
             } 
         });
@@ -200,7 +206,8 @@ export default class ConversationsBlock {
     }
     
 
-    createThread(name, date) {
+    createThread(name, date, message, email) {
+        console.log(message)
         let conversation = document.createElement('div');
         conversation.setAttribute('class', 'conversation');
 
@@ -212,6 +219,11 @@ export default class ConversationsBlock {
 
         let conversation__user = document.createElement('div');
         conversation__user.setAttribute('class', 'conversation__user');
+
+        let img = document.createElement('img');
+        img.setAttribute('src', 'https://www.gravatar.com/avatar/' + getHash(email) + '?s=60&d=wavatar')
+        img.setAttribute('class', 'conversation__user-photo');
+        img.setAttribute('alt', 'user photo');
 
         let conversation__name = document.createElement('span');
         conversation__name.setAttribute('class', 'conversation__name')
@@ -226,12 +238,20 @@ export default class ConversationsBlock {
         conversation__date.setAttribute('class', 'conversation__date conversation__date_viewed');
         conversation__date.textContent = formatedDate(date);
         
+        let conversation__message = document.createElement('p');
+        conversation__message.setAttribute('class', 'conversation__message');
+
+        message = message == null ? message : message.body;
+        conversation__message.textContent = message;
+
         conversation.append(conversation__wrap);
         conversation__wrap.append(conversation__header);
 
         conversation__header.append(conversation__user);
+        conversation__user.append(img);
         conversation__user.append(conversation__name);
         conversation__header.append(conversation__date);
+        conversation__wrap.append(conversation__message);
         
         return conversation;
     }
@@ -288,7 +308,7 @@ async function SendStartThreadRequest(id) {
     });
 }
 
-async function SendgetThreadMessagesRequest(threadId) {
+async function SendGetThreadMessagesRequest(threadId) {
     return await fetch('https://geekhub-frontend-js-9.herokuapp.com/api/threads/messages/'+threadId, {
         method: 'get',
         headers:{
@@ -297,4 +317,12 @@ async function SendgetThreadMessagesRequest(threadId) {
         }
     })
     .then((resp)=> { return resp })
+}
+
+async function SendGetUserByIdRequest(id) {
+    return await fetch('https://geekhub-frontend-js-9.herokuapp.com/api/users/' + id, {
+        headers: {
+            'x-access-token': localStorage.token
+        }
+    }).then((resp)=> resp)
 }
