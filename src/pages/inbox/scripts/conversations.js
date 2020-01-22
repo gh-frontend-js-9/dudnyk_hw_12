@@ -75,7 +75,8 @@ export default class ConversationsBlock {
                                 if (resp.length > 0) {
                                     resp.forEach((el) => {
                                         let isMe = localStorage.myId === el.user['_id']
-                                        chatContainer.append(messBlock.createMessage(el, getHash(senderEmail), isMe))
+                                        let email = isMe ? localStorage.myEmail : senderEmail
+                                        chatContainer.append(messBlock.createMessage(el, getHash(email), isMe))
                                     })
                                 }                        
                                 console.log(resp)
@@ -257,7 +258,7 @@ export default class ConversationsBlock {
     }
 }
 
-function getHash(email) {
+export function getHash(email) {
     return md5(email.toLowerCase());
 }
 

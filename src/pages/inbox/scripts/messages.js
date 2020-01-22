@@ -1,3 +1,5 @@
+import {getHash} from './conversations.js';
+
 export default class Messages {
     constructor(root) {
         this.root = root;
@@ -18,7 +20,7 @@ export default class Messages {
         return chatContainer;
     }
 
-    createMessage(message, email ,isMe) {
+    createMessage(message, hash ,isMe) {
         // console.log(email)
         // console.log(message);
         // console.log(obj);
@@ -29,12 +31,12 @@ export default class Messages {
         let container = document.createElement('div');
         container.classList.add('message', 'message_' + messageType + '-someone');
         
-        let content =document.createElement('div');
+        let content = document.createElement('div');
         content.classList.add('message__content');
 
         let img = document.createElement('img');
                 
-        img.setAttribute('src', 'https://www.gravatar.com/avatar/' + email + '?s=60&d=wavatar')
+        img.setAttribute('src', 'https://www.gravatar.com/avatar/' + hash + '?s=60&d=wavatar')
         img.setAttribute('alt', 'user photo');
         img.classList.add('message__user-photo', 'message_' + margin + '_5');
 
@@ -90,8 +92,7 @@ export default class Messages {
                     })
                     .then((resp) => {
                         console.log(resp)
-                        let me  = obj.users.find((obj) => {if(obj['_id' === localStorage.myId]) return obj})
-                        let message = this.createMessage(resp, /*me,*/ true)
+                        let message = this.createMessage(resp, getHash(localStorage.myEmail), true)
                         chatContainer.append(message);
                         chatContainer.scrollTop = chatContainer.scrollHeight;
                         textarea.value = '';
