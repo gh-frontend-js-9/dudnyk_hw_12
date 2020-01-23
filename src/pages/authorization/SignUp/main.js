@@ -13,7 +13,7 @@ signUpform.addEventListener("submit", (event) => {
     if (isFilled(email, password, name)) {
         Send(email.value, password.value, name.value)
         .then((resp) => {
-            if (resp.status === 200) {
+            if (200 == resp.status || resp.status == 201) {
                 window.location.href = '../../../index.html'
             } else {
                 let errorMessages = document.getElementsByClassName('auth-container__bad-response');
@@ -24,7 +24,7 @@ signUpform.addEventListener("submit", (event) => {
                 } 
                 let badResponse = document.createElement('p');
                 badResponse.setAttribute('class', 'auth-container__bad-response');
-                badResponse.textContent = "User does not exist";
+                badResponse.textContent = "Can not create user";
                 document.body.after(badResponse);
             }
         })
@@ -39,7 +39,7 @@ async function Send(email, password, name) {
     'password': password,
     'name': name
     }
-    return await fetch('//https://geekhub-frontend-js-9.herokuapp.com/api/users/', {
+    return await fetch('https://geekhub-frontend-js-9.herokuapp.com/api/users/', {
     method: 'POST',
     headers: {
     'Content-Type': 'application/json'
