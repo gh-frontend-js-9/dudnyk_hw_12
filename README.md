@@ -1,2 +1,3 @@
 My site https://dudnyk-hw12.netlify.com/
-will be upgraded soon, or not)
+Warning!!!
+You need to disable adblock to see chart page
