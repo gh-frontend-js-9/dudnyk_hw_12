@@ -4,20 +4,7 @@ import validateToken from '../authorization/scripts/validateCurrent.js'
 import {md5} from 'pure-md5'
 
 // localStorage.token = 'as'
-validateToken(localStorage.token).then((resp)=> {
-    if(resp.status === 200) {
-        return resp.json();
-    } else {
-        window.location.href = '/index.html';
-    }
-}).then((resp)=> {
-    localStorage.setItem('myId', resp['_id'])
-    localStorage.setItem('myEmail', resp.email)
-    console.log(resp.email)
-    let hash = md5(resp.email.toLowerCase()); 
-    let img = document.querySelector('#header-menu__user-photo');
-    img.setAttribute('src', 'https://www.gravatar.com/avatar/' + hash + '?d=wavatar&s=60');
-})
+
 
 let convContainer = document.querySelector('#conversations-container');
 

@@ -8,7 +8,8 @@ let conf = {
         'pages/authorization/ResetPassword/reset': './src/pages/authorization/ResetPassword/main.js',
         'pages/authorization/SignUp/signUp': './src/pages/authorization/SignUp/main.js',
         'pages/authorization/LogIn/logIn': './src/pages/authorization/LogIn/main.js',
-        'pages/inbox/main': './src/pages/inbox/main.js'
+        'pages/inbox/main': './src/pages/inbox/main.js',
+        'pages/main': './src/pages/main.js'
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
@@ -68,10 +69,19 @@ let conf = {
             template: path.resolve(__dirname, './src/pages/inbox/inbox.html'),
             inject: false
         }),
+        new HtmlWebPackPlugin({
+            filename: './pages/dashboard.html',
+            template: path.resolve(__dirname, './src/pages/dashboard.html'),
+            inject: false
+        }),
         new CopyWebpackPlugin([
             {
                 from: './src/assets/images', 
                 to: './images'
+            },
+            {
+                from: './node_modules/@fortawesome',
+                to: './assets/@fortawesome'
             }
         ])
     ]

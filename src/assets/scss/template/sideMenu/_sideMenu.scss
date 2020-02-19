@@ -1,7 +1,9 @@
 .message-page__navigation {
-    float:  left;
-    height: 88vh;
-    width: 12vh;
+    // display: flex;
+    // flex-direction: column;
+    // align-self: stretch;
+
+    min-width: 50px;
     background-color: $color1;
     box-shadow: 0 3px 80px rgba(23, 24, 32, 0.2);
 }
@@ -41,12 +43,7 @@
 
     @for $i from 1 through 5 {
         &__item-#{$i} {
-            @if $i == 4 {
-                background-image: url('/images/navigation/active' + $i + '.png' );
-            }
-            @else {
-                background-image: url('/images/navigation/' + $i + '.png' );
-            }
+            background-image: url('/images/navigation/' + $i + '.png' );        
             background-repeat: no-repeat;
         }
     }
