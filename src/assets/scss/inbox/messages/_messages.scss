@@ -1,0 +1,123 @@
+.page-messages {
+    &__chat {
+        flex-basis: 50%;
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+.chat {
+    background-color: $color1;
+
+    &__container {
+        margin: 0 auto;
+        width: 95%;
+        height: 85%;
+        overflow-y: scroll;
+        overflow-x: hidden;
+    
+        &::-webkit-scrollbar {
+            width: 0px;
+        }
+    }
+
+
+    &__send-block {
+        height: 15%;
+        @include flex-center();
+        position: relative;
+    }
+
+    &__textarea {
+        resize: none;
+        border-radius: 15px;
+        padding: 5px 10% 5px 10px ;
+        border: 1px solid rgba(156, 161, 178, 0.3);
+        background-color: $color6;
+        width: 80%;
+        height: 30%;
+        overflow-y: hidden;
+        color: $color5;
+        
+        &::placeholder {
+            font-size: 1.2em;
+        }
+        &:focus {
+            outline: none;
+            border: 2px solid $color3;
+        }
+    }
+
+    &__attachment {
+        position: absolute;
+        right: 10%;
+        transform: translateX(50%);
+        width: 30px;
+        height: 30px;
+        background: url('/images/message_input/attach.png') no-repeat;
+        background-position: center;
+        cursor: pointer;
+    }
+}
+
+.message {
+    display: flex;
+    flex-direction: column;
+    margin-top: 5px;
+
+    &_to-someone {
+        align-items: flex-end;
+    }
+
+    &_from-someone {
+        align-items: flex-start;
+    }
+
+    &__content {
+        display: flex;
+        max-width: 90%;
+    }
+
+    &__user-photo {
+        width: 42px;
+        border-radius: 50%;
+        align-self: flex-end;
+    }
+
+    &__text {
+        color: $color5;
+        padding: 10px;
+        word-break: break-all;
+
+        &_to-someone {
+            border-radius: 10px 10px 0 10px;
+            background-color:  $color3;
+        }
+    
+        &_from-someone {
+            border-radius: 10px 10px 10px 0;
+            background-color: $color6;;
+        }
+    }
+
+    &__date {
+        font-size: 0.8em;
+        color: $color4;
+        
+        &_to-someone {
+            margin: 5px 45px 10px 0;
+        }
+
+        &_from-someone {
+            margin: 5px 0 10px 45px ; ;
+        }
+    }
+
+    &_mgright_5 {
+        margin-right: 5px;
+    }
+
+    &_mgleft_5 {
+        margin-left: 5px;
+    }
+} 

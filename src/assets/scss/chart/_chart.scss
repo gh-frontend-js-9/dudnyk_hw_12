@@ -1,0 +1,128 @@
+@import './table';
+
+.chart {
+    display: flex;
+    height: 80%;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: $color2;
+
+    &-header {
+        display: flex;
+        width: 95%;
+        height: 90px;
+        margin: 0 auto;
+        justify-content: space-between;
+        color: $color4;
+        
+        &__donuts-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        &__donuts-block {
+            display: flex;
+            width: 33%;
+        }
+
+        &__select-container {
+            display: flex;
+            align-items: center;
+        }
+
+        &__select {
+            color: $color4;
+            border: 1px solid rgba(158, 163, 180, 0.3);
+            background-color: $color2;
+            border-radius: 10px;
+            padding: 2px;
+        }
+
+        &__text {
+            margin-right: 10px;
+        }
+    }
+}
+
+.ct-label {
+    color: $color3;
+}
+
+.ct-series-a .ct-line {
+    stroke: $color3;
+    stroke-width: 5px;
+    /* Create a dashed line with a pattern */
+    // stroke-dasharray: 10px 20px;
+}
+
+.ct-series-a .ct-area {
+    fill: $color3;
+}
+
+.ct-series-a .ct-point {
+    stroke: $color3;
+    stroke-width: 15px;
+    &_active {
+        stroke: $color5;
+    
+    }
+}
+
+.ct-series-a .ct-slice-donut/*, .ct-series-a .ct-line, .ct-series-a .ct-point, .ct-series-a .ct-slice-donut */{
+    stroke: $color3;
+}
+
+
+.ct-series-b .ct-slice-donut {
+    stroke: $color6;
+}
+
+.donut1, 
+.donut2,
+.donut3 {
+    position: relative;
+}
+
+.donut {
+    position: relative;
+    display: flex;
+    padding-right: 10px;
+
+    &__text{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform:  translate(-50%, -50%);
+    }
+
+
+    &__description {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        order: 2;
+        padding-right: 10px;
+    }
+
+    &__stat {
+        color: $color5;
+        font-size: 18px;
+        font-weight: 600;
+    }
+
+    &__title {
+        font-size: 14px;
+        text-transform: uppercase;
+
+    }
+}
+
+.ct-end {
+    cursor: pointer;
+    &_active {
+        color: $color5;
+    }
+}
+

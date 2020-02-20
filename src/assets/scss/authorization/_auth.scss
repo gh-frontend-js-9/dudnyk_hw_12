@@ -1,0 +1,85 @@
+.auth-page {
+    background-color: $color1;
+}
+
+.auth-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 300px;
+    height: 300px;
+
+    &__logo {
+        display: inline-block;
+        width: 180px;
+        height: 30px;
+        margin: 0 auto;
+    }
+
+    &__title {
+        color: $color4;
+        text-align: center;
+    }
+
+    &__link {
+        color: $color4;
+        text-decoration: none;
+        &_position_center {
+            align-self: center;
+        }
+    }
+
+    &__input {
+        box-sizing: border-box;
+        display: inline-block;
+        width: 100%;
+        height: 30px;
+        margin: 5px 5px 5px 0;
+        padding: 5px;
+        border: 1px solid rgba(156, 161, 178, 0.3);
+        background-color: #404359;
+
+        &_border_red {
+            border-color: red;
+        }
+    }
+
+    &__error-message {
+        font-size: 0.8em;
+        color: red;
+    }
+
+    &__btn {
+        border: 1px solid black;
+        padding: 5px;
+        margin: 5px;
+        width: 80px;
+        min-height: 35px;
+        background-color: $color3;
+        border-radius: 3px;
+        cursor: pointer;
+        border: 1px solid rgba(156, 161, 178, 0.3);
+        color: $color5;
+        align-self: center;
+    }
+
+    &__bad-response {
+        background-color: $color3;
+        color: $color5;
+        border: 1px solid black;
+        border-radius: 3px;
+        text-align: center;
+        width: 80%;
+        margin: 10px auto;
+        padding: 5px;
+    }
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+}

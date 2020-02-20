@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" type="image/ico" href="/images/favicon/favicon.ico">
+    <link rel="stylesheet" href="/style.css">
+    <title>Virtus</title>
+</head>
+<body class="auth-page">
+
+    <div class="auth-container">
+        
+        <img src="/images/logo/Logo.png" alt="virtus" class="auth-container__logo">
+        
+        <h1 class="auth-container__title">Reset password</h1>
+
+        <a href="../../../index.html" class="auth-container__link">Not a member?</a>
+
+        <form action="https://geekhub-frontend-js-9.herokuapp.com/api/users/reset_password" method="POST" class="auth-form" id="resetForm">
+
+            <input type="email" name="email" id="email" class="auth-container__input" placeholder="Email">
+            <input type="password" name="password" id="password" class="auth-container__input" placeholder="Password">
+            <input type="password" name="password" id="confirm-password" class="auth-container__input" placeholder="Confirmation  password">
+        
+            <button type="submit" class="auth-container__btn">Reset password</button>
+        </form>
+
+    </div>
+</body>
+<script src="/pages/authorization/ResetPassword/reset.js"></script>
+</html>

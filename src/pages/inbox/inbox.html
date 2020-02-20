@@ -1,0 +1,100 @@
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <meta http-equiv="X-UA-Compatible" content="ie=edge">
+            <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,900&display=swap" rel="stylesheet">
+            <link rel="shortcut icon" type="image/ico" href="/images/favicon/favicon.ico">
+            <link rel="stylesheet" href="/style.css">
+            <title>Inbox</title>
+        </head>
+        <body class="message-page">
+            <header class="header">
+                
+                <a href="#" class="header__logo">
+                    <img src="/images/logo/Logo.png" alt="virtus"> 
+                </a>
+                
+                <div class="header-menu header__menu">
+                    <div class="header-menu__add">Add</div>
+                    <div class="header-menu__search"></div>
+                    <div class="header-menu__notification"></div>
+                    <div class="header-menu__user">
+                        <img src="" alt="user" class="header-menu__user-photo" id="header-menu__user-photo">
+                    </div>
+                </div>
+            
+            </header>
+
+
+            <nav class="navigation message-page__navigation">
+                
+                <ul class="list navigation__list">
+                    <li class="list__item"><a href="#" class="list__item-1"></a></li>
+                    <li class="list__item"><a href="#" class="list__item-2"></a></li>
+                    <li class="list__item"><a href="#" class="list__item-3"></a></li>
+                    <li class="list__item"><a href="#" class="list__item-4"></a></li>
+                    <li class="list__item"><a href="#" class="list__item-5"></a></li>
+                </ul>
+            
+            </nav>
+
+            <div class="control-menu message-page__control-menu">
+                
+                <div class="control-menu__menu">
+                    <div class="control-menu__box">
+                        <div class="control-menu__inbox"></div>
+                        <span class="control-menu__text control-menu__text_color_white control-menu__text_fsize_s">Inbox</span>
+                    </div>
+
+                    <div class="control-menu__box">
+                        <div class="control-menu__sent"></div>
+                        <span class="control-menu__text control-menu__text_color_kinda-black control-menu__text_fsize_s">Sent</span>
+                    </div>
+
+                    <div class="control-menu__box">
+                        <div class="control-menu__trash"></div>
+                        <span class="control-menu__text control-menu__text_color_kinda-black control-menu__text_fsize_s">Trash</span>
+                    </div>
+                </div>
+            
+                <div class="control-menu__filter-message-box">
+                    <span class="control-menu__text control-menu__text_color_white">Filter messages:</span>
+                    <select class="control-menu__filter control-menu__text control-menu__text_color_white">
+                        <option value="Data" class="control-menu__text control-menu__text_color_white">Date</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <div class="page-messages__messages">
+                
+                <div class="conversations">
+
+                    <div class="conversations-container" id="conversations-container">
+
+                    </div>
+
+                    <div class="conversations__add-new-conversation-block">
+                        <div class="conversations__add-conversation-btn" id="conversations__add-conversation-btn">
+                            <span class="conversations__text conversations__text_color_white">New Conversation</span>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="chat page-messages__chat" id="chat">                
+                </div>
+
+                <div class="profile-container">
+                    <div class="profile-container__wrap" id="profile-container__wrap">
+
+                    </div>                                                                                                                                                                                                                                                                                                                                                                                                      
+                </div>
+            </div>
+            
+        <script src="/pages/inbox/main.js"></script>
+        </body>
+        </html>
